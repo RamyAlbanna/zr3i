@@ -13,6 +13,7 @@ import { Toast, ToastContainer } from "react-bootstrap";
 import { Subject } from "rxjs";
 import { useEffect, useState } from "react";
 export const ERROR_MESSAGE$ = new Subject<string>();
+import DesignElements from "./shared/designElements";
 
 export const App = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -42,6 +43,7 @@ export const App = () => {
           <Route path="/" element={<PublicLayout />}>
             <Route index element={<Home />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="design-elements" element={<DesignElements />} />
             <Route path="login" element={<Login />} />
             <Route path="*" element={<NotFound />} />
           </Route>
