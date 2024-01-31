@@ -8,7 +8,7 @@ export default function DesignElements() {
         <tr>
           <th>#</th>
           <th>First Name</th>
-          <th>Last Name</th>
+          <th>Last Name test</th>
           <th>Username</th>
         </tr>
       </thead>
