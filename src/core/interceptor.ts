@@ -1,5 +1,6 @@
 import axios from "axios";
-import { ERROR_MESSAGE$ } from "../App";
+import { IS_LOADING$ } from "../shared/components/spinner";
+import { ERROR_MESSAGE$ } from "../shared/components/toaster";
 
 export const apiUrl = "https://fakestoreapi.com/products";
 const axiosHttp = axios.create({
@@ -28,6 +29,7 @@ axiosHttp.interceptors.response.use(
   },
   (error) => {
     ERROR_MESSAGE$.next(error.message);
+    IS_LOADING$.next(false);
     return Promise.reject(error);
   }
 );
