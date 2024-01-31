@@ -9,23 +9,49 @@ import Login from "./layouts/public-layout/pages/login";
 import NotFound from "./layouts/public-layout/pages/notFoundPage";
 import SuperAdminLayout from "./layouts/superAdmin/pages/superAdmin.layout";
 import Admin from "./layouts/superAdmin/pages/admin";
+import { Toast, ToastContainer } from "react-bootstrap";
+import { Subject } from "rxjs";
+import { useEffect, useState } from "react";
+export const ERROR_MESSAGE$ = new Subject<string>();
 
 export const App = () => {
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    ERROR_MESSAGE$.subscribe((value) => {
+      setErrorMessage(value);
+    });
+  }, [errorMessage]);
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<PublicLayout />}>
-          <Route index element={<Home />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="login" element={<Login />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-        <Route element={AuthGuard()}>
-          <Route path="/admin" element={<SuperAdminLayout />}>
-            <Route index element={<Admin />} />
+    <>
+      <ToastContainer position="top-end" style={{ padding: 30 }}>
+        <Toast
+          bg="danger"
+          onClose={() => setErrorMessage("")}
+          color="primary"
+          show={errorMessage !== ""}
+          className="text-white"
+          autohide
+        >
+          <Toast.Body>{errorMessage}</Toast.Body>
+        </Toast>
+      </ToastContainer>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<PublicLayout />}>
+            <Route index element={<Home />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="login" element={<Login />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+          <Route element={AuthGuard()}>
+            <Route path="/admin" element={<SuperAdminLayout />}>
+              <Route index element={<Admin />} />
+            </Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 };

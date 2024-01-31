@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ERROR_MESSAGE$ } from "../App";
 
 export const apiUrl = "https://fakestoreapi.com/products";
 const axiosHttp = axios.create({
@@ -26,6 +27,7 @@ axiosHttp.interceptors.response.use(
     return response;
   },
   (error) => {
+    ERROR_MESSAGE$.next(error.message);
     return Promise.reject(error);
   }
 );
