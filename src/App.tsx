@@ -12,8 +12,8 @@ import Admin from "./layouts/superAdmin/pages/admin";
 import { Toast, ToastContainer } from "react-bootstrap";
 import { Subject } from "rxjs";
 import { useEffect, useState } from "react";
-export const ERROR_MESSAGE$ = new Subject<string>();
 import DesignElements from "./shared/designElements";
+export const ERROR_MESSAGE$ = new Subject<string>();
 
 export const App = () => {
   const [errorMessage, setErrorMessage] = useState("");
