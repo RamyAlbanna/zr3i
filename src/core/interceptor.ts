@@ -9,14 +9,14 @@ const axiosHttp = axios.create({
 
 axiosHttp.interceptors.request.use(
   (request: any) => {
-    IS_LOADING$.next(true);
-    const clonedRequest = { ...request };
-    const token = "Bearer " + localStorage.getItem("token");
-    clonedRequest.headers = {
-      ...clonedRequest.headers,
-      Authorization: token,
+    const token = "token";
+    return {
+      ...request,
+      headers: {
+        ...(token && { Authorization: `${token}` }),
+        ...request.headers,
+      },
     };
-    return clonedRequest;
   },
   (error) => {
     return Promise.reject(error);
@@ -25,7 +25,6 @@ axiosHttp.interceptors.request.use(
 
 axiosHttp.interceptors.response.use(
   (response) => {
-    IS_LOADING$.next(false);
     return response;
   },
   (error) => {

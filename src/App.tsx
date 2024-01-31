@@ -5,7 +5,7 @@ import "./App.scss";
 import PublicLayout from "./layouts/public-layout/pages/public.layout";
 import Home from "./layouts/public-layout/pages/home";
 import Contact from "./layouts/public-layout/pages/contact";
-import { Login } from "./layouts/public-layout/pages/login";
+import Login from "./layouts/public-layout/pages/login";
 import NotFound from "./layouts/public-layout/pages/notFoundPage";
 import SuperAdminLayout from "./layouts/superAdmin/pages/superAdmin.layout";
 import Admin from "./layouts/superAdmin/pages/admin";
