@@ -1,4 +1,4 @@
-import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 
 export default function Header() {
   return (
@@ -9,7 +9,6 @@ export default function Header() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="admin/users">Users</Nav.Link>
               <Nav.Link href="admin">Super admin</Nav.Link>
               <Nav.Link href="login">Login</Nav.Link>
             </Nav>

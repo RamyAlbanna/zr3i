@@ -1,16 +1,14 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import AuthGuard from "./core/auth/authGuard";
 import "./App.scss";
-import PublicLayout from "./public-layout/pages/publicLayout";
-import Home from "./public-layout/pages/home";
-import Contact from "./public-layout/pages/contact";
-import NotFound from "./public-layout/pages/notFoundPage";
-import PrivateLayout from "./private-layout/pages/privateLayout";
-import Admin from "./private-layout/pages/admin";
-import Users from "./private-layout/pages/users";
-import AddUser from "./private-layout/pages/addUser";
-import Login from "./public-layout/pages/login";
-import AuthGuard from "./auth/authGuard";
+import PublicLayout from "./layouts/public-layout/pages/public.layout";
+import Home from "./layouts/public-layout/pages/home";
+import Contact from "./layouts/public-layout/pages/contact";
+import Login from "./layouts/public-layout/pages/login";
+import NotFound from "./layouts/public-layout/pages/notFoundPage";
+import SuperAdminLayout from "./layouts/superAdmin/pages/superAdmin.layout";
+import Admin from "./layouts/superAdmin/pages/admin";
 
 export const App = () => {
   return (
@@ -22,12 +20,9 @@ export const App = () => {
           <Route path="login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Route>
-        <Route element={<AuthGuard />}>
-          <Route path="/admin" element={<PrivateLayout />}>
+        <Route element={AuthGuard()}>
+          <Route path="/admin" element={<SuperAdminLayout />}>
             <Route index element={<Admin />} />
-            <Route path="users" element={<Users />}>
-              <Route path="add-user" element={<AddUser />} />
-            </Route>
           </Route>
         </Route>
       </Routes>

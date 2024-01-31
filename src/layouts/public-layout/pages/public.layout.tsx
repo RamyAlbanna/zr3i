@@ -3,7 +3,7 @@ import Footer from "./footer";
 import Header from "./header";
 import { Container } from "react-bootstrap";
 
-export default function Layout() {
+export default function PublicLayout() {
   return (
     <>
       <Header />
