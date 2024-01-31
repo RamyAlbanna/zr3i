@@ -5,23 +5,33 @@ import "./App.scss";
 import PublicLayout from "./layouts/public-layout/pages/public.layout";
 import Home from "./layouts/public-layout/pages/home";
 import Contact from "./layouts/public-layout/pages/contact";
-import Login from "./layouts/public-layout/pages/login";
+import { Login } from "./layouts/public-layout/pages/login";
 import NotFound from "./layouts/public-layout/pages/notFoundPage";
 import SuperAdminLayout from "./layouts/superAdmin/pages/superAdmin.layout";
 import Admin from "./layouts/superAdmin/pages/admin";
-import { Toast, ToastContainer } from "react-bootstrap";
+import { Spinner, Toast, ToastContainer } from "react-bootstrap";
 import { Subject } from "rxjs";
 import { useEffect, useState } from "react";
 import DesignElements from "./shared/designElements";
+
 export const ERROR_MESSAGE$ = new Subject<string>();
+export const IS_LOADING$ = new Subject<boolean>();
 
 export const App = () => {
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    ERROR_MESSAGE$.subscribe((value) => {
+    let errorSubscription = ERROR_MESSAGE$.subscribe((value) => {
       setErrorMessage(value);
     });
+    let loadingSubscription = IS_LOADING$.subscribe((value) => {
+      setIsLoading(value);
+    });
+    return () => {
+      errorSubscription.unsubscribe();
+      loadingSubscription.unsubscribe();
+    };
   }, [errorMessage]);
 
   return (
@@ -38,6 +48,13 @@ export const App = () => {
           <Toast.Body>{errorMessage}</Toast.Body>
         </Toast>
       </ToastContainer>
+      <div className={isLoading ? "overlay" : ""}></div>
+      <Spinner
+        className="spinner"
+        animation="border"
+        hidden={!isLoading}
+        variant="primary"
+      />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<PublicLayout />}>

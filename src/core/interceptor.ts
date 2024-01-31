@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ERROR_MESSAGE$ } from "../App";
+import { ERROR_MESSAGE$, IS_LOADING$ } from "../App";
 
 export const apiUrl = "https://fakestoreapi.com/products";
 const axiosHttp = axios.create({
@@ -8,14 +8,14 @@ const axiosHttp = axios.create({
 
 axiosHttp.interceptors.request.use(
   (request: any) => {
-    const token = "token";
-    return {
-      ...request,
-      headers: {
-        ...(token && { Authorization: `${token}` }),
-        ...request.headers,
-      },
+    IS_LOADING$.next(true);
+    const clonedRequest = { ...request };
+    const token = "Bearer " + localStorage.getItem("token");
+    clonedRequest.headers = {
+      ...clonedRequest.headers,
+      Authorization: token,
     };
+    return clonedRequest;
   },
   (error) => {
     return Promise.reject(error);
@@ -24,6 +24,7 @@ axiosHttp.interceptors.request.use(
 
 axiosHttp.interceptors.response.use(
   (response) => {
+    IS_LOADING$.next(false);
     return response;
   },
   (error) => {

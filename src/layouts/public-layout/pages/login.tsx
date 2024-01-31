@@ -1,10 +1,10 @@
 import { Button } from "react-bootstrap";
 import axiosHttp from "../../../core/interceptor";
 
-export default function Login() {
+export const Login = () => {
   const onLoggedIn = () => {
     localStorage.setItem("token", "token");
-    localStorage.setItem("userRole", "employee");
+    localStorage.setItem("userRole", "admin");
     axiosHttp.get("https://fakestoreapi.com/products").then(
       (value) => {},
       () => {}
@@ -12,4 +12,4 @@ export default function Login() {
   };
 
   return <Button onClick={onLoggedIn}>Login</Button>;
-}
+};
