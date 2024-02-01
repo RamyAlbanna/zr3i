@@ -12,6 +12,7 @@ import Admin from "./layouts/superAdmin/pages/admin";
 import DesignElements from "./shared/designElements";
 import Toaster from "./shared/components/toaster";
 import LoadingSpinner from "./shared/components/spinner";
+import Register from "./layouts/public-layout/pages/register";
 
 export const App = () => {
   return (
@@ -25,6 +26,7 @@ export const App = () => {
             <Route path="contact" element={<Contact />} />
             <Route path="design-elements" element={<DesignElements />} />
             <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
             <Route path="*" element={<NotFound />} />
           </Route>
           <Route element={AuthGuard()}>
