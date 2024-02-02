@@ -4,6 +4,7 @@ import logo from "../../../assets/images/logo.png";
 import { Link } from "react-router-dom";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
+import axiosHttp from "../../../core/interceptor";
 
 export default function Login() {
   const formik = useFormik({
@@ -18,7 +19,7 @@ export default function Login() {
         .min(6, "minimum is 6 characters!"),
     }),
     onSubmit: (values) => {
-      console.log(values);
+      axiosHttp.get("https://fakestoreapi.com/products");
     },
   });
 

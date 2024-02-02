@@ -19,11 +19,11 @@ export default function LoadingSpinner() {
 
   return (
     <>
-      <div className={!isLoading ? "overlay" : ""}></div>
+      <div className={isLoading ? "overlay" : ""}></div>
       <Spinner
         className="spinner"
         animation="border"
-        hidden={isLoading}
+        hidden={!isLoading}
         variant="success"
       />
     </>

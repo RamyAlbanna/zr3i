@@ -9,6 +9,7 @@ const axiosHttp = axios.create({
 
 axiosHttp.interceptors.request.use(
   (request: any) => {
+    IS_LOADING$.next(true);
     const token = "token";
     return {
       ...request,
@@ -25,6 +26,7 @@ axiosHttp.interceptors.request.use(
 
 axiosHttp.interceptors.response.use(
   (response) => {
+    IS_LOADING$.next(false);
     return response;
   },
   (error) => {
