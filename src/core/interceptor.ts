@@ -20,7 +20,7 @@ axiosHttp.interceptors.request.use(
     };
   },
   (error) => {
-    return Promise.reject(error);
+    ERROR_MESSAGE$.next(error.message);
   }
 );
 
@@ -32,7 +32,6 @@ axiosHttp.interceptors.response.use(
   (error) => {
     ERROR_MESSAGE$.next(error.message);
     IS_LOADING$.next(false);
-    return Promise.reject(error);
   }
 );
 
