@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { Subject } from "rxjs";
+import "./../../shared/_shared.scss";
 
 export const IS_LOADING$ = new Subject<boolean>();
 
@@ -18,12 +19,12 @@ export default function LoadingSpinner() {
 
   return (
     <>
-      <div className={isLoading ? "overlay" : ""}></div>
+      <div className={!isLoading ? "overlay" : ""}></div>
       <Spinner
         className="spinner"
         animation="border"
-        hidden={!isLoading}
-        variant="primary"
+        hidden={isLoading}
+        variant="success"
       />
     </>
   );
