@@ -2,9 +2,10 @@ import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import logo from "../../../assets/images/logo.png";
 import { Link } from "react-router-dom";
-import { Formik, useFormik } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import axiosHttp from "../../../core/interceptor";
+import { RolesEnum } from "../../../core/enums/roles.enum";
 
 export default function Login() {
   const formik = useFormik({
@@ -20,6 +21,8 @@ export default function Login() {
     }),
     onSubmit: (values) => {
       axiosHttp.get("https://fakestoreapi.com/products");
+      localStorage.setItem("token", "token");
+      localStorage.setItem("role", RolesEnum.superAdmin);
     },
   });
 
