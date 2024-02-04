@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 import axiosHttp from "../../../core/interceptor";
 import IUser from "../../../core/models/user.model";
-import "react-bootstrap-table-next/dist/react-bootstrap-table2.css";
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
-import Table from "react-bootstrap-table-next";
+import BootstrapTable, { SelectRowProps } from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 
 export default function Admin() {
@@ -35,16 +35,28 @@ export default function Admin() {
     hideSizePerPage: true,
   });
 
+  const selectRow: SelectRowProps<any> = {
+    mode: "checkbox",
+    clickToSelect: true,
+    hideSelectColumn: true,
+    bgColor: "var(--color-primary)",
+    onSelect: (row: IUser) => {
+      console.log(row.id);
+    },
+  };
+
   const table = (
     <div className="row mb-5">
       <div className="col-md-8">
         <h2>Users</h2>
         <Card>
           <Card.Body>
-            <Table
+            <BootstrapTable
+              bootstrap4
               keyField="id"
               data={users}
               columns={columns}
+              selectRow={selectRow}
               pagination={pagination}
             />
           </Card.Body>

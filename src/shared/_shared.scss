@@ -23,9 +23,9 @@
 
 .pagination {
   .active .page-link {
-    background: green !important;
+    background: var(--color-primary) !important;
   }
   :not(.active) .page-link {
-    color: green;
+    color: var(--color-primary);
   }
 }
