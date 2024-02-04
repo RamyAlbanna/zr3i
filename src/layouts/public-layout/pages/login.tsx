@@ -21,6 +21,7 @@ export default function Login() {
     }),
     onSubmit: (values) => {
       axiosHttp.get("https://fakestoreapi.com/products");
+
       localStorage.setItem("token", "token");
       localStorage.setItem("role", RolesEnum.superAdmin);
     },

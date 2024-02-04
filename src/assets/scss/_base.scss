@@ -19,6 +19,10 @@
   --border-radius-circle: 500px;
 }
 
+body {
+  user-select: none;
+}
+
 a {
   text-decoration: none;
   color: var(--color-primary-light);
@@ -170,6 +174,16 @@ input[type="checkbox"] {
   height: 1.2rem;
 }
 
-.table > :not(caption) > * > * {
-  background-color: unset;
+.pagination {
+  .active .page-link {
+    background: var(--color-primary) !important;
+  }
+  :not(.active) .page-link {
+    color: var(--color-primary);
+  }
+}
+
+.title-with-button {
+  display: flex;
+  justify-content: space-between;
 }

@@ -2,31 +2,41 @@ import { useEffect, useState } from "react";
 import { Toast, ToastContainer } from "react-bootstrap";
 import { Subject } from "rxjs";
 
-export const ERROR_MESSAGE$ = new Subject<string>();
+export const TOASTER$ = new Subject<{
+  type: "success" | "error" | undefined;
+  message: string;
+}>();
 
 export default function Toaster() {
-  const [errorMessage, setErrorMessage] = useState("");
+  const [toasterMessage, setToasterMessage] = useState("");
+  const [toasterType, setToasterType] = useState<
+    "success" | "error" | undefined
+  >(undefined);
 
   useEffect(() => {
-    let errorSubscription = ERROR_MESSAGE$.subscribe((value) => {
-      setErrorMessage(value);
+    let toasterSubscription = TOASTER$.subscribe((toaster) => {
+      setToasterMessage(toaster.message);
+      setToasterType(toaster.type);
     });
     return () => {
-      errorSubscription.unsubscribe();
+      toasterSubscription.unsubscribe();
     };
-  }, [errorMessage]);
+  }, [toasterMessage]);
 
   return (
     <ToastContainer position="top-end" style={{ padding: 30 }}>
       <Toast
-        bg="danger"
-        onClose={() => setErrorMessage("")}
+        bg={toasterType === "error" ? "danger" : "success"}
+        onClose={() => {
+          setToasterMessage("");
+          setToasterType(undefined);
+        }}
         color="primary"
-        show={errorMessage !== ""}
+        show={toasterMessage !== ""}
         className="text-white"
         autohide
       >
-        <Toast.Body>{errorMessage}</Toast.Body>
+        <Toast.Body>{toasterMessage}</Toast.Body>
       </Toast>
     </ToastContainer>
   );

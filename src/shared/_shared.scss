@@ -20,12 +20,3 @@
   height: 100px;
   z-index: 3;
 }
-
-.pagination {
-  .active .page-link {
-    background: var(--color-primary) !important;
-  }
-  :not(.active) .page-link {
-    color: var(--color-primary);
-  }
-}

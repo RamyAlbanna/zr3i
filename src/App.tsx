@@ -8,11 +8,12 @@ import Contact from "./layouts/public-layout/pages/contact";
 import Login from "./layouts/public-layout/pages/login";
 import NotFound from "./layouts/public-layout/pages/notFoundPage";
 import SuperAdminLayout from "./layouts/superAdmin/pages/superAdmin.layout";
-import Admin from "./layouts/superAdmin/pages/admin";
+import Users from "./layouts/superAdmin/pages/users/users";
 import DesignElements from "./shared/designElements";
 import Toaster from "./shared/components/toaster";
 import LoadingSpinner from "./shared/components/spinner";
 import Register from "./layouts/public-layout/pages/register";
+import CreateUser from "./layouts/superAdmin/pages/users/createUser";
 
 export const App = () => {
   return (
@@ -30,8 +31,9 @@ export const App = () => {
             <Route path="*" element={<NotFound />} />
           </Route>
           <Route element={AuthGuard()}>
-            <Route path="/admin" element={<SuperAdminLayout />}>
-              <Route index element={<Admin />} />
+            <Route path="/users" element={<SuperAdminLayout />}>
+              <Route index element={<Users />} />
+              <Route path="create-user" element={<CreateUser />} />
             </Route>
           </Route>
         </Routes>

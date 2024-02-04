@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { IS_LOADING$ } from "../shared/components/spinner";
-import { ERROR_MESSAGE$ } from "../shared/components/toaster";
+import { TOASTER$ } from "../shared/components/toaster";
 
-export const apiUrl = "https://fakestoreapi.com/products";
+export const apiUrl = "https://jsonplaceholder.typicode.com";
 const axiosHttp = axios.create({
   baseURL: `${apiUrl}`,
 });
@@ -20,18 +20,21 @@ axiosHttp.interceptors.request.use(
     };
   },
   (error) => {
-    ERROR_MESSAGE$.next(error.message);
+    TOASTER$.next({ type: "error", message: error.message });
   }
 );
 
 axiosHttp.interceptors.response.use(
   (response) => {
     IS_LOADING$.next(false);
+    response.config.method === "post" &&
+      TOASTER$.next({ type: "success", message: "created successfully!" });
     return response;
   },
-  (error) => {
-    ERROR_MESSAGE$.next(error.message);
+  (error: AxiosError) => {
+    TOASTER$.next({ type: "error", message: error.message });
     IS_LOADING$.next(false);
+    return Promise.reject(error);
   }
 );
 
