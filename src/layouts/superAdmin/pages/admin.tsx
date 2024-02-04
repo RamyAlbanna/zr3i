@@ -38,7 +38,6 @@ export default function Admin() {
   const selectRow: SelectRowProps<any> = {
     mode: "checkbox",
     clickToSelect: true,
-    hideSelectColumn: true,
     bgColor: "var(--color-primary)",
     onSelect: (row: IUser) => {
       console.log(row.id);

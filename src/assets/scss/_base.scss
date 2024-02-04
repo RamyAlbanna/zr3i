@@ -164,6 +164,12 @@ input.form-control {
   height: 1.2em;
 }
 
+input[type="checkbox"] {
+  accent-color: var(--color-primary);
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
 .table > :not(caption) > * > * {
   background-color: unset;
 }
