@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Card } from "react-bootstrap";
 import axiosHttp from "../../../../core/interceptor";
 import IUser from "../../../../core/models/user.model";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
@@ -26,6 +25,21 @@ export default function Users() {
     { dataField: "email", text: "Email", sort: true },
     { dataField: "phone", text: "Phone", sort: true },
     { dataField: "website", text: "Website", sort: true },
+    {
+      dataField: "action",
+      text: "Action",
+      formatter: (cell: any, row: IUser) => {
+        return (
+          <div className="d-flex gap-3">
+            <i
+              onClick={() => navigate("create-user", { state: { id: row.id } })}
+              className="fa fa-pen"
+            ></i>
+            <i className="fa fa-trash"></i>
+          </div>
+        );
+      },
+    },
   ];
 
   const pagination = paginationFactory({
@@ -60,7 +74,7 @@ export default function Users() {
   const table = (
     <div className="row mb-5">
       <div className="col-md-12">
-        <div className="title-with-button mb-5">
+        <div className="title-with-button mb-3">
           <h2>Users</h2>
           <button
             onClick={() => navigate("create-user")}
@@ -78,7 +92,6 @@ export default function Users() {
           selectRow={selectRow}
           pagination={pagination}
         />
-        selected rows:{selectedRows}
       </div>
     </div>
   );

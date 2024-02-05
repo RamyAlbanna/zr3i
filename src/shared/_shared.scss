@@ -20,3 +20,32 @@
   height: 100px;
   z-index: 3;
 }
+
+.pagination {
+  .active .page-link {
+    background: var(--color-primary) !important;
+  }
+  :not(.active) .page-link {
+    color: var(--color-primary);
+  }
+}
+
+.title-with-button {
+  display: flex;
+  justify-content: space-between;
+}
+
+.fa {
+  color: transparent;
+  -webkit-text-stroke-width: 1px;
+  &.fa-trash {
+    -webkit-text-stroke-color: red;
+  }
+  &.fa-pen {
+    -webkit-text-stroke-color: var(--color-primary);
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}

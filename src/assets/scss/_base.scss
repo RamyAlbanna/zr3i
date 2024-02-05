@@ -173,17 +173,3 @@ input[type="checkbox"] {
   width: 1.2rem;
   height: 1.2rem;
 }
-
-.pagination {
-  .active .page-link {
-    background: var(--color-primary) !important;
-  }
-  :not(.active) .page-link {
-    color: var(--color-primary);
-  }
-}
-
-.title-with-button {
-  display: flex;
-  justify-content: space-between;
-}

@@ -4,4 +4,5 @@ export default interface IUser {
   email: string;
   phone: string;
   website: string;
+  country: { name: string };
 }
